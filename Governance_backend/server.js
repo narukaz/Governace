@@ -3,6 +3,7 @@ import { Person } from "./Model/person_schema.js";
 import { Party } from "./Model/party_schema.js";
 import cors from "cors";
 import { connect_to_mongo } from "./config/connectDb.js";
+require("dotenv").config();
 
 let app = express();
 app.use(express.json());
@@ -15,14 +16,13 @@ const citizen_object_id =
 const party_registery =
   "0x7aa95b9cfa1c4877da8d734d07d1b68d24600b9977587a68b3d38dc1b9388b1d";
 
-let client = connect_to_mongo(
-  "mongodb+srv://naruka:abcd@cluster0.q0lqt.mongodb.net/"
-)
+let client = connect_to_mongo(process.env.MONGO_URI)
   .then((mongooseInstance) => {
     console.log("Connection name:", mongooseInstance.connection.name); // 'data'
     console.log("Host:", mongooseInstance.connection.host); // 'localhost'
     console.log("DB connected successfully 🚀");
   })
+
   .catch((err) => {
     console.error("Connection error:", err.message);
   });

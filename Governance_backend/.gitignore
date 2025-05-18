@@ -1,0 +1,62 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.* # in case you use .env.development, .env.production, etc.
+
+# Logs
+logs/
+*.log
+log/
+*.csv
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Editor folders and files
+.vscode/
+.idea/
+*.swp
+*.sublime-workspace
+*.sublime-project
+
+# Build output
+dist/
+build/
+coverage/
+tmp/
+temp/
+.cache/
+
+# Misc
+*.tgz
+*.gz
+*.zip
+
+# MongoDB data dump (if any)
+dump/
+
+# PM2 logs and ecosystem files
+pids/
+*.pid
+*.seed
+ecosystem.config.js
+
+# Next.js or similar SSR frameworks
+.next/
+out/
+
+# TypeScript
+*.tsbuildinfo
+
+# Test coverage
+coverage/
+
+# Optional: Ignore secrets or database exports
+secrets/
+db_exports/
