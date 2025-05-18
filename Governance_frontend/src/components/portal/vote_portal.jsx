@@ -50,7 +50,7 @@ function VotePortal() {
   const fetch_req_party = async (value) => {
     try {
       let { data } = await axios.post(
-        "http://localhost:8080/fetch_sorted_party",
+        "https://governace.onrender.com/fetch_sorted_party",
         {
           query: value,
         }

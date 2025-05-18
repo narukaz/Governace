@@ -100,13 +100,16 @@ function Admin_portal() {
       console.log("createdPartyObject", createdPartyObject);
 
       if (createdPartyObject) {
-        let send = await axios.post("http://localhost:8080/register_party", {
-          party_name: partyData.party_name,
-          party_obj: createdPartyObject.objectId,
-          state: partyData.state,
-          since: partyData.since,
-          party_icon: partyData.party_icon,
-        });
+        let send = await axios.post(
+          "https://governace.onrender.com/register_party",
+          {
+            party_name: partyData.party_name,
+            party_obj: createdPartyObject.objectId,
+            state: partyData.state,
+            since: partyData.since,
+            party_icon: partyData.party_icon,
+          }
+        );
 
         if (send.data.success) {
           setPartyData(initialState);
@@ -156,9 +159,12 @@ function Admin_portal() {
         signature,
       });
       if (result.digest) {
-        let { data } = await axios.post("http://localhost:8080/add_citizen", {
-          ...createCitizenData,
-        });
+        let { data } = await axios.post(
+          "https://governace.onrender.com/add_citizen",
+          {
+            ...createCitizenData,
+          }
+        );
         if (data.success) {
           console.log("Citizen Registered:", result);
           toast.success("You are now registered as a citizen!");
@@ -204,7 +210,7 @@ function Admin_portal() {
 
       if (result?.digest) {
         let { data } = await axios.delete(
-          `http://localhost:8080/remove_citizen/${citizenToRemove}`
+          `https://governace.onrender.com/remove_citizen/${citizenToRemove}`
         );
         if (data.success) {
           setCitizenToRemove("");
@@ -250,7 +256,7 @@ function Admin_portal() {
 
       if (result?.digest) {
         let { data } = await axios.delete(
-          `http://localhost:8080/remove_party/${partyId}`
+          `https://governace.onrender.com/remove_party/${partyId}`
         );
         if (data.success) {
           toast.success("party remove successfully!");

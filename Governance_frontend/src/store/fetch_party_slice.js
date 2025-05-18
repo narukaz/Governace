@@ -12,7 +12,7 @@ export const fetch_party = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8080/fetch_party_results"
+        "https://governace.onrender.com/fetch_party_results"
       );
 
       return data;
