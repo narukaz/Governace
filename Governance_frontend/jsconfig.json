@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+      "jsx": "react-jsx",
+      "baseUrl": ".",            // so "@/..." resolves from project root
+      "paths": {
+        "@/*": ["src/*"]         // map "@/components" → "src/components"
+      }
+    },
+    "include": ["src"]
+  }
+  
