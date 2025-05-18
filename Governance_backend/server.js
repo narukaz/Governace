@@ -3,7 +3,8 @@ import { Person } from "./Model/person_schema.js";
 import { Party } from "./Model/party_schema.js";
 import cors from "cors";
 import { connect_to_mongo } from "./config/connectDb.js";
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
 let app = express();
 app.use(express.json());
