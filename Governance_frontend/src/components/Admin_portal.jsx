@@ -20,6 +20,7 @@ import {
   PARTY_REGISTERY,
 } from "@/config/config.js";
 import { Loader } from "lucide-react";
+import { RotateCcwIcon } from "lucide-react";
 
 let initialState = {
   party_name: "",
@@ -42,7 +43,7 @@ function Admin_portal() {
   const user = useCurrentAccount();
   const { mutateAsync: signTransaction } = useSignTransaction();
   const [isLoading, setIsLoading] = useState(false);
-
+  const [resetParty, setResetParty] = useState("");
   const [createCitizenData, setCreateCitizenData] = useState(initialData);
   const [citizenToRemove, setCitizenToRemove] = useState("");
   const [partyToRemove, setPartyToRemove] = useState("");
@@ -50,6 +51,7 @@ function Admin_portal() {
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
+
   const createparty = async () => {
     console.log("hit");
     if (!user?.address) {
@@ -127,7 +129,43 @@ function Admin_portal() {
       toast.error("Party registration failed.");
     }
   };
+  const reset_votes = async () => {
+    if (!user?.address) {
+      toast.error("User address not found");
+      return;
+    }
 
+    if (!resetParty) {
+      toast.error("No party id is shared");
+      return;
+    }
+
+    try {
+      let tx = new Transaction();
+      tx.moveCall({
+        package: PACKAGE_ID,
+        module: "votes",
+        function: "reset_vote",
+        arguments: [tx.object(resetParty)],
+      });
+      tx.setSender(user.address);
+
+      const { bytes, signature } = await signTransaction({
+        transaction: tx,
+        chain: "sui:testnet",
+      });
+
+      const result = await suiClient.executeTransactionBlock({
+        transactionBlock: bytes,
+        signature,
+      });
+
+      console.log(result);
+    } catch (error) {
+      console.error("Party deletion failed:", error);
+      toast.error("Failed to delete party.");
+    }
+  };
   const register_citizen = async () => {
     if (!user?.address) {
       toast.error("User address not found.");
@@ -283,7 +321,7 @@ function Admin_portal() {
       {/* admin feature logic */}
       <div className="mt-12 bg-transparent flex justify-center ">
         <Tabs defaultValue="add_citizen" className="w-[700px] ">
-          <TabsList defaultValue="" className="grid w-full grid-cols-4 mb-12">
+          <TabsList defaultValue="" className="grid w-full grid-cols-5 mb-12">
             <TabsTrigger className="font-mono" value="add_citizen">
               Add Citizen
             </TabsTrigger>
@@ -296,8 +334,40 @@ function Admin_portal() {
             <TabsTrigger className="font-mono" value="remove_party">
               Remove Party
             </TabsTrigger>
+            <TabsTrigger className="font-mono" value="reset_votes">
+              Reset Votes
+            </TabsTrigger>
           </TabsList>
+          <TabsContent
+            value="reset_votes"
+            className="flex flex-col w-full items-center border-1 gap-5 h-auto py-5 rounded-2xl font-bold font-mono bg-white"
+          >
+            <h1>Reset party Votes</h1>
+            <Input
+              className="w-sm font-light"
+              placeholder="input party address"
+              value={resetParty}
+              onChange={(e) => {
+                setResetParty(e.target.value);
+              }}
+            />
 
+            <Button
+              onClick={() => {
+                setIsLoading(true);
+                reset_votes();
+                setIsLoading(false);
+              }}
+              className="w-sm cursor-pointer"
+            >
+              Reset party votes{" "}
+              {!isLoading ? (
+                <RotateCcwIcon />
+              ) : (
+                <Loader className="animate-spin" />
+              )}
+            </Button>
+          </TabsContent>
           <TabsContent
             value="add_citizen"
             className="flex flex-col w-full items-center border-1 gap-4 h-auto py-5 rounded-2xl font-bold font-mono bg-white"

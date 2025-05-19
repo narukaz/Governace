@@ -20,20 +20,21 @@ import {
 } from "@/config/config.js";
 import axios from "axios";
 import { Copy } from "lucide-react";
+import PartyCard from "../party_card";
+import wt from "../../assets/wt.svg";
 
 function VotePortal() {
   const suiClient = useSuiClient();
   const user = useCurrentAccount();
   const { mutateAsync: signTransaction } = useSignTransaction();
   const [open, setOpen] = useState(false);
-  // const [party, setParty] = useState("");
+  const [winnerDetails, setWinnerDetails] = useState({});
   const [typingTimeout, setTypingTimeout] = useState(null);
   const [sorted, setSorted] = useState([]);
-  // const [selectedParty, setSelectedParty] = useState("");
   const [userQuery, setUserQuery] = useState("");
   const dispatch = useDispatch();
+  const [showWinner, setShowWinner] = useState(false);
   const { data, loading, error } = useSelector((state) => state.party);
-  const [index, setIndex] = useState(0);
 
   //handle input function
   const handleInputChange = (e) => {
@@ -102,9 +103,6 @@ function VotePortal() {
       console.log(error);
     }
   };
-  // const print_sorted = () => {
-  //   console.log(sorted);
-  // };
   async function handle_copy(value) {
     try {
       await navigator.clipboard.writeText(value);
@@ -123,13 +121,37 @@ function VotePortal() {
       fetch_req_party(userQuery);
     }
   }, [open]);
-
-  // console.log(sorted);
-
+  console.log(winnerDetails);
   return (
     <>
       <Header />
+      {/* pop-up for winner */}
+      {showWinner && (
+        <>
+          <div className="bg-black w-full h-[100%] fixed left-0 top-0 z-40 opacity-60"></div>
+          <img
+            src={wt}
+            className="fixed z-50 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[800px] opacity-30 "
+          />
+          <div className="flex h-auto w-auto px-5 py-3 fixed z-60 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2">
+            <PartyCard
+              key={winnerDetails._id}
+              partyName={winnerDetails?.party_name}
+              avatarUrl={winnerDetails?.party_icon}
+              since={winnerDetails?.since}
+              state={winnerDetails?.state}
+              blockchainAddress={winnerDetails?.party_obj}
+              votes={Number(winnerDetails?.votes)}
+            />
+            <X
+              onClick={() => setShowWinner(false)}
+              className="absolute right-8 top-5 cursor-pointer"
+            />
+          </div>
+        </>
+      )}
       {/* pop over */}
+
       {open && (
         <>
           {/* Overlay */}
@@ -254,7 +276,10 @@ function VotePortal() {
           </div>
         </div>
       ) : (
-        <Dashboard />
+        <Dashboard
+          setWinnerDetails={setWinnerDetails}
+          setShowWinner={setShowWinner}
+        />
       )}
       {/* <VoterPieChart /> */}
     </>
