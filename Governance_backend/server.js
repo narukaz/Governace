@@ -10,20 +10,12 @@ let app = express();
 app.use(express.json());
 app.use(cors());
 
-const package_id =
-  "0x65f6e13efce4b3bf0f533d273ec70212530ad73ca1503255c8d4900817b67302";
-const citizen_object_id =
-  "0x495322b61a9def1baa192b7dff1bb4ea0800de4a95752c5308987f04d7007b77";
-const party_registery =
-  "0x7aa95b9cfa1c4877da8d734d07d1b68d24600b9977587a68b3d38dc1b9388b1d";
-
 let client = connect_to_mongo(process.env.MONGO_URI)
   .then((mongooseInstance) => {
     console.log("Connection name:", mongooseInstance.connection.name); // 'data'
     console.log("Host:", mongooseInstance.connection.host); // 'localhost'
     console.log("DB connected successfully 🚀");
   })
-
   .catch((err) => {
     console.error("Connection error:", err.message);
   });
@@ -101,9 +93,11 @@ app.post("/add_citizen", async (req, res) => {
         message: "failed to add the user!",
       });
     }
+    console.log(body);
 
-    let new_user = await Person.create({ ...body });
-    if (new_user) {
+    let result = await Person.create(body);
+    console.log("hello");
+    if (result) {
       res.status(200).json({
         success: true,
         message: "create user successfully",
@@ -115,6 +109,7 @@ app.post("/add_citizen", async (req, res) => {
       });
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
       success: false,
       message: "internal server error!",

@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const personSchema = Schema({
+const personSchema = new Schema({
   first_name: {
     type: String,
     required: true, // 👈 ensures no duplicates
@@ -34,7 +34,6 @@ const personSchema = Schema({
     unique: true, // 👈 ensures no duplicates
     trim: true, // optional: removes extra spaces
   },
-  role: String,
 });
 
 export const Person = model("person", personSchema);
