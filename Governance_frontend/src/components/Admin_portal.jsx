@@ -146,7 +146,7 @@ function Admin_portal() {
         package: PACKAGE_ID,
         module: "votes",
         function: "reset_vote",
-        arguments: [tx.object(resetParty)],
+        arguments: [tx.object(resetParty), tx.object(CITIZEN_OBJ_ID)],
       });
       tx.setSender(user.address);
 
@@ -319,7 +319,7 @@ function Admin_portal() {
     <div className="bg-gradient-to-b from-indigo-100 via-white to-blue-100 h-lvh">
       <Header />
       {/* admin feature logic */}
-      <div className="mt-12 bg-transparent flex justify-center ">
+      <div className="flex justify-center mt-12 bg-transparent ">
         <Tabs defaultValue="add_citizen" className="w-[700px] ">
           <TabsList defaultValue="" className="grid w-full grid-cols-5 mb-12">
             <TabsTrigger className="font-mono" value="add_citizen">
@@ -340,11 +340,11 @@ function Admin_portal() {
           </TabsList>
           <TabsContent
             value="reset_votes"
-            className="flex flex-col w-full items-center border-1 gap-5 h-auto py-5 rounded-2xl font-bold font-mono bg-white"
+            className="flex flex-col items-center w-full h-auto gap-5 py-5 font-mono font-bold bg-white border-1 rounded-2xl"
           >
             <h1>Reset party Votes</h1>
             <Input
-              className="w-sm font-light"
+              className="font-light w-sm"
               placeholder="input party address"
               value={resetParty}
               onChange={(e) => {
@@ -358,7 +358,7 @@ function Admin_portal() {
                 reset_votes();
                 setIsLoading(false);
               }}
-              className="w-sm cursor-pointer"
+              className="cursor-pointer w-sm"
             >
               Reset party votes{" "}
               {!isLoading ? (
@@ -370,12 +370,12 @@ function Admin_portal() {
           </TabsContent>
           <TabsContent
             value="add_citizen"
-            className="flex flex-col w-full items-center border-1 gap-4 h-auto py-5 rounded-2xl font-bold font-mono bg-white"
+            className="flex flex-col items-center w-full h-auto gap-4 py-5 font-mono font-bold bg-white border-1 rounded-2xl"
           >
             <h1>Add Citizen</h1>
 
             <Input
-              className="w-sm font-light"
+              className="font-light w-sm"
               placeholder="First Name"
               value={createCitizenData.first_name}
               onChange={(e) =>
@@ -387,7 +387,7 @@ function Admin_portal() {
             />
 
             <Input
-              className="w-sm font-light"
+              className="font-light w-sm"
               placeholder="Middle Name"
               value={createCitizenData.mid_name}
               onChange={(e) =>
@@ -399,7 +399,7 @@ function Admin_portal() {
             />
 
             <Input
-              className="w-sm font-light"
+              className="font-light w-sm"
               placeholder="Last Name"
               value={createCitizenData.last_name}
               onChange={(e) =>
@@ -411,7 +411,7 @@ function Admin_portal() {
             />
 
             <Input
-              className="w-sm font-light"
+              className="font-light w-sm"
               placeholder="Wallet Address"
               value={createCitizenData.wallet_address}
               onChange={(e) =>
@@ -422,7 +422,7 @@ function Admin_portal() {
               }
             />
             <Input
-              className="w-sm font-light"
+              className="font-light w-sm"
               placeholder="Aadhaar ID"
               value={createCitizenData.aadhaar_id}
               onChange={(e) =>
@@ -434,7 +434,7 @@ function Admin_portal() {
             />
 
             <Input
-              className="w-sm font-light"
+              className="font-light w-sm"
               placeholder="State"
               value={createCitizenData.state}
               onChange={(e) =>
@@ -451,7 +451,7 @@ function Admin_portal() {
                 await register_citizen(createCitizenData);
                 setIsLoading(false);
               }}
-              className="w-sm cursor-pointer"
+              className="cursor-pointer w-sm"
             >
               Add {isLoading ? <Loader className="animate-spin" /> : <Plus />}
             </Button>
@@ -459,11 +459,11 @@ function Admin_portal() {
 
           <TabsContent
             value="remove_citizen"
-            className="flex flex-col w-full items-center border-1 gap-5 h-auto py-5 rounded-2xl font-bold font-mono bg-white"
+            className="flex flex-col items-center w-full h-auto gap-5 py-5 font-mono font-bold bg-white border-1 rounded-2xl"
           >
             <h1>Remove Citizen</h1>
             <Input
-              className="w-sm font-light"
+              className="font-light w-sm"
               placeholder="input user address"
               onChange={(e) => {
                 setCitizenToRemove(e.target.value);
@@ -476,7 +476,7 @@ function Admin_portal() {
                 remove_citizen();
                 setIsLoading(false);
               }}
-              className="w-sm cursor-pointer"
+              className="cursor-pointer w-sm"
             >
               Remove citizen{" "}
               {!isLoading ? <Delete /> : <Loader className="animate-spin" />}
@@ -485,11 +485,11 @@ function Admin_portal() {
 
           <TabsContent
             value="remove_party"
-            className="flex flex-col w-full items-center border-1 gap-5 h-auto py-5 rounded-2xl font-bold font-mono bg-white"
+            className="flex flex-col items-center w-full h-auto gap-5 py-5 font-mono font-bold bg-white border-1 rounded-2xl"
           >
             <h1>Remove party</h1>
             <Input
-              className="w-sm font-light"
+              className="font-light w-sm"
               placeholder="input party address"
               value={partyToRemove}
               onChange={(e) => {
@@ -502,7 +502,7 @@ function Admin_portal() {
                 delete_party(partyToRemove);
                 setIsLoading(false);
               }}
-              className="w-sm cursor-pointer"
+              className="cursor-pointer w-sm"
             >
               Remove party <Delete />
             </Button>
@@ -510,11 +510,11 @@ function Admin_portal() {
 
           <TabsContent
             value="create_party"
-            className="flex flex-col w-full items-center border-1 gap-5 h-auto py-5 rounded-2xl font-bold font-mono bg-white"
+            className="flex flex-col items-center w-full h-auto gap-5 py-5 font-mono font-bold bg-white border-1 rounded-2xl"
           >
             <h1>Remove party</h1>
             <Input
-              className="w-sm font-light"
+              className="font-light w-sm"
               placeholder="input party name"
               value={partyData.party_name}
               onChange={(e) =>
@@ -523,7 +523,7 @@ function Admin_portal() {
             />
 
             <Input
-              className="w-sm font-light"
+              className="font-light w-sm"
               placeholder="input party state"
               value={partyData.state}
               onChange={(e) =>
@@ -532,7 +532,7 @@ function Admin_portal() {
             />
 
             <Input
-              className="w-sm font-light"
+              className="font-light w-sm"
               placeholder="input party icon-url"
               value={partyData.party_icon}
               onChange={(e) =>
@@ -541,7 +541,7 @@ function Admin_portal() {
             />
 
             <Input
-              className="w-sm font-light"
+              className="font-light w-sm"
               placeholder="existing since"
               value={partyData.since}
               onChange={(e) =>
@@ -555,7 +555,7 @@ function Admin_portal() {
                 createparty();
                 setIsLoading(false);
               }}
-              className="w-sm cursor-pointer"
+              className="cursor-pointer w-sm"
             >
               create party{" "}
               {!isLoading ? <Plus /> : <Loader className="animate-spin" />}
