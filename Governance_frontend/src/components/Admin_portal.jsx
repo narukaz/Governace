@@ -515,7 +515,7 @@ function Admin_portal() {
             value="create_party"
             className="flex flex-col items-center w-full h-auto gap-5 py-5 font-mono font-bold bg-white border-1 rounded-2xl"
           >
-            <h1>Remove party</h1>
+            <h1>create_party</h1>
             <Input
               className="font-light w-sm"
               placeholder="input party name"
