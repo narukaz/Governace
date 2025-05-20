@@ -159,7 +159,10 @@ function Admin_portal() {
         transactionBlock: bytes,
         signature,
       });
-
+      if (result.digest) {
+        setResetParty("");
+        return toast.success("successfully vhanged");
+      }
       console.log(result);
     } catch (error) {
       console.error("Party deletion failed:", error);
