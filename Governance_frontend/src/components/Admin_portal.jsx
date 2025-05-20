@@ -161,7 +161,7 @@ function Admin_portal() {
       });
       if (result.digest) {
         setResetParty("");
-        return toast.success("successfully vhanged");
+        return toast.success("successfully updated");
       }
       console.log(result);
     } catch (error) {
