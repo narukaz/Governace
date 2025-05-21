@@ -1,12 +1,52 @@
-# React + Vite
+# 🗳️ Governace – Sui Governance Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek and interactive governance dashboard built on the **Sui blockchain**. This app allows admins to create political parties, register citizens, and lets users cast votes through a decentralized interface.
 
-Currently, two official plugins are available:
+## 🌐 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🚀 [Try It Here](https://governace-sigma.vercel.app/)
+- 🎥 [Watch Demo Video](https://youtu.be/V7gcOYUPons)
+- 📦 [GitHub Repository](https://github.com/narukaz/Governace)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+- 🔐 **Admin Panel** (`/admin`)
+  - Create political parties
+  - Declare citizens
+- 🗳️ **Voting Panel** (`/vote`)
+  - View parties
+  - Cast votes on-chain
+- ✅ Seamless Sui Wallet integration
+- 📊 Real-time governance display
+
+---
+
+## 📂 Routes
+
+| Route    | Description                                  |
+| -------- | -------------------------------------------- |
+| `/admin` | Admin interface to manage parties & citizens |
+| `/vote`  | Voting panel for registered citizens         |
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React, Tailwind CSS
+- **Blockchain**: Sui
+- **Wallet**: Sui Wallet Adapter
+- **Hosting**: Vercel
+
+---
+
+## 🚀 Getting Started
+
+Clone the project and install dependencies:
+
+```bash
+git clone https://github.com/narukaz/Governace.git
+cd Governace
+npm install
+```
