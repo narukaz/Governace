@@ -7,6 +7,7 @@ A sleek and interactive governance dashboard built on the **Sui blockchain**. Th
 - 🚀 [Try It Here](https://governace-sigma.vercel.app/)
 - 🎥 [Watch Demo Video](https://youtu.be/V7gcOYUPons)
 - 📦 [GitHub Repository](https://github.com/narukaz/Governace)
+- Package ID -> 0xab10dab21e1c4988301ba636f3380381ec1147e022659bc628fe4e0c2151528e
 
 ---
 

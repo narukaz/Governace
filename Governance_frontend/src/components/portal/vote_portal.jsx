@@ -133,7 +133,7 @@ function VotePortal() {
             src={wt}
             className="fixed z-50 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[800px] opacity-30 "
           />
-          <div className="flex h-auto w-auto px-5 py-3 fixed z-60 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2">
+          <div className="fixed flex w-auto h-auto px-5 py-3 -translate-x-1/2 -translate-y-1/2 z-60 left-1/2 top-1/2">
             <PartyCard
               key={winnerDetails._id}
               partyName={winnerDetails?.party_name}
@@ -145,7 +145,7 @@ function VotePortal() {
             />
             <X
               onClick={() => setShowWinner(false)}
-              className="absolute right-8 top-5 cursor-pointer"
+              className="absolute cursor-pointer right-8 top-5"
             />
           </div>
         </>
@@ -156,7 +156,7 @@ function VotePortal() {
         <>
           {/* Overlay */}
           <div
-            className="fixed left-0 top-0 bg-black bg-opacity-40 backdrop-blur-sm w-full h-full z-40"
+            className="fixed top-0 left-0 z-40 w-full h-full bg-black bg-opacity-40 backdrop-blur-sm"
             onClick={() => {
               setOpen(false);
             }}
@@ -172,10 +172,10 @@ function VotePortal() {
                 setOpen(false);
               }}
               variant="outline"
-              className="group absolute right-4 top-4 hover:shadow-md bg-red-500 text-white font-mono rounded-full p-2 transition-all"
+              className="absolute p-2 font-mono text-white transition-all bg-red-500 rounded-full group right-4 top-4 hover:shadow-md"
             >
               close{" "}
-              <X className="ml-1 group-hover:rotate-180 transition-transform" />
+              <X className="ml-1 transition-transform group-hover:rotate-180" />
             </Button>
 
             {/* Input Field */}
@@ -184,11 +184,11 @@ function VotePortal() {
               onChange={(e) => handleInputChange(e)}
               type="text"
               placeholder="Search parties..."
-              className="w-full max-w-xl px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-400 text-gray-900 mb-6"
+              className="w-full max-w-xl px-4 py-2 mb-6 text-gray-900 placeholder-gray-400 transition bg-gray-100 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
 
             {/* Voting Cards Grid */}
-            <div className="flex flex-wrap px-2 py-3 justify-start h-full overflow-y-auto gap-6 w-full font-mono">
+            <div className="flex flex-wrap justify-start w-full h-full gap-6 px-2 py-3 overflow-y-auto font-mono">
               {sorted.length > 0 &&
                 sorted.map((party) => (
                   <div
@@ -199,11 +199,11 @@ function VotePortal() {
                     <img
                       src={party.party_icon}
                       alt={`${party.party_name} icon`}
-                      className="w-full h-40 object-contain bg-gray-100 p-3 border-b"
+                      className="object-contain w-full h-40 p-3 bg-gray-100 border-b"
                     />
 
                     {/* Party Info */}
-                    <div className="p-4 flex flex-col gap-2">
+                    <div className="flex flex-col gap-2 p-4">
                       <h2 className="text-lg font-bold text-blue-700">
                         {party.party_name}
                       </h2>
@@ -222,7 +222,7 @@ function VotePortal() {
                             party?.party_obj.slice(-5)}
                         </p>
                         <Copy
-                          className="hover:text-blue-500  cursor-pointer"
+                          className="cursor-pointer hover:text-blue-500"
                           onClick={() => {
                             handle_copy(party?.party_obj);
                           }}
@@ -234,7 +234,7 @@ function VotePortal() {
                         onClick={() => {
                           on_cast_vote(party?.party_obj);
                         }}
-                        className="mt-3 w-full py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
+                        className="w-full py-2 mt-3 font-semibold text-white transition bg-blue-600 rounded-lg hover:bg-blue-700"
                       >
                         Vote
                       </button>
@@ -258,7 +258,7 @@ function VotePortal() {
       </div>
       {/* <CreatePartyCard onCreate={createparty} /> */}
       {loading ? (
-        <div className="w-full max-w-xl bg-white p-4 rounded-md shadow-md animate-pulse flex gap-4 items-start">
+        <div className="flex items-start w-full max-w-xl gap-4 p-4 bg-white rounded-md shadow-md animate-pulse">
           {/* Avatar Circle */}
           <div className="w-[80px] h-[80px] rounded-full bg-gray-300" />
 
@@ -272,7 +272,7 @@ function VotePortal() {
             <div className="w-3/4 h-3 bg-gray-200 rounded" />
 
             {/* Maybe a button placeholder */}
-            <div className="w-24 h-6 bg-gray-300 rounded mt-2" />
+            <div className="w-24 h-6 mt-2 bg-gray-300 rounded" />
           </div>
         </div>
       ) : (
